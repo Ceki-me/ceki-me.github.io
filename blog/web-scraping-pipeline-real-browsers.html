@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Building a Web Scraping Pipeline with Real Browsers | Ceki Browser</title>
+  <meta name="description" content="Build a production-grade web scraping pipeline using real browser sessions. Avoid IP blocks, CAPTCHAs, and fingerprinting detection with residential browsers.">
+  <link rel="canonical" href="https://ceki-me.github.io/blog/web-scraping-pipeline-real-browsers.html">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Building a Web Scraping Pipeline with Real Browsers",
+    "description": "Build a production-grade web scraping pipeline using real browser sessions. Avoid IP blocks, CAPTCHAs, and fingerprinting detection.",
+    "author": { "@type": "Organization", "name": "Ceki Browser", "url": "https://browser.ceki.me" },
+    "datePublished": "2026-07-17",
+    "dateModified": "2026-07-17",
+    "publisher": { "@type": "Organization", "name": "Ceki Browser", "url": "https://browser.ceki.me" }
+  }
+  </script>
+  <meta property="og:title" content="Building a Web Scraping Pipeline with Real Browsers">
+  <meta property="og:description" content="Build a production-grade scraping pipeline with real residential browsers.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://ceki-me.github.io/blog/web-scraping-pipeline-real-browsers.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.7; color: #1a1a2e; background: #f8f9fa; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 60px 0 40px; text-align: center; }
+    header h1 { font-size: 2rem; margin-bottom: 16px; }
+    header p { font-size: 1.1rem; opacity: 0.85; max-width: 600px; margin: 0 auto; }
+    header .meta { margin-top: 16px; font-size: 0.9rem; opacity: 0.7; }
+    nav { background: #fff; border-bottom: 1px solid #e9ecef; padding: 12px 0; }
+    nav .container { display: flex; gap: 24px; }
+    nav a { color: #4361ee; text-decoration: none; font-size: 0.95rem; font-weight: 500; }
+    nav a:hover { text-decoration: underline; }
+    main { padding: 48px 0; }
+    article { background: white; border-radius: 12px; padding: 48px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    article h2 { font-size: 1.6rem; margin: 40px 0 16px; }
+    article h3 { font-size: 1.25rem; margin: 28px 0 12px; }
+    article p { margin-bottom: 16px; color: #4a5568; }
+    article ul, article ol { margin: 16px 0 24px; padding-left: 24px; color: #4a5568; }
+    article li { margin-bottom: 8px; }
+    article pre { background: #1a1a2e; color: #e2e8f0; padding: 20px; border-radius: 8px; overflow-x: auto; margin: 20px 0; font-size: 0.9rem; line-height: 1.5; }
+    article code { background: #edf2f7; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
+    article pre code { background: none; padding: 0; }
+    .cta-box { background: linear-gradient(135deg, #4361ee, #3a0ca3); color: white; border-radius: 12px; padding: 32px; margin: 40px 0; text-align: center; }
+    .cta-box h3 { color: white; margin-top: 0; }
+    .cta-box p { color: rgba(255,255,255,0.85); }
+    .cta-box a { display: inline-block; background: white; color: #4361ee; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; margin-top: 16px; }
+    footer { text-align: center; padding: 40px 0; color: #718096; font-size: 0.9rem; border-top: 1px solid #e9ecef; }
+    footer a { color: #4361ee; text-decoration: none; }
+    @media (max-width: 640px) { header h1 { font-size: 1.5rem; } article { padding: 24px; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container">
+      <a href="https://ceki-me.github.io/">← Home</a>
+      <a href="https://ceki-me.github.io/blog/index.html">Blog</a>
+      <a href="https://browser.ceki.me" target="_blank" rel="noopener">browser.ceki.me</a>
+    </div>
+  </nav>
+
+  <header>
+    <div class="container">
+      <h1>Building a Web Scraping Pipeline with Real Browsers</h1>
+      <p>A practical guide to building production-grade scrapers that never get blocked.</p>
+      <div class="meta">Published July 17, 2026 · 10 min read</div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <article>
+        <p>Web scraping in 2026 faces an escalating arms race. Anti-bot systems like Cloudflare Turnstile, DataDome, and Akamai Bot Manager use machine learning to detect and block automated traffic. Traditional approaches — rotating proxies, puppeteer/playwright, headless Chrome — become less effective every month.</p>
+
+        <p><strong>The solution:</strong> use real browsers rented from real people. Each request comes from a genuine browser installation with an authentic fingerprint and a residential IP.</p>
+
+        <h2>The Architecture</h2>
+        <p>A production scraping pipeline with real browsers has four layers:</p>
+
+        <ol>
+          <li><strong>Orchestrator</strong> — manages session lifecycle, queuing, and retries</li>
+          <li><strong>Browser Pool</strong> — rented browser sessions from <a href="https://browser.ceki.me" target="_blank" rel="noopener">Ceki Browser</a></li>
+          <li><strong>Extractor</strong> — parses and structures the scraped data</li>
+          <li><strong>Storage</strong> — persists results (database, S3, or webhook)</li>
+        </ol>
+
+        <h2>Step 1: Set Up the Browser Pool</h2>
+        <pre><code>import { CekiBrowser } from '@ceki/browser-sdk';
+
+class BrowserPool {
+  constructor(token, size = 5) {
+    this.ceki = new CekiBrowser({ token });
+    this.size = size;
+    this.sessions = [];
+  }
+
+  async initialize() {
+    for (let i = 0; i < this.size; i++) {
+      const session = await this.ceki.rent({ headless: false });
+      this.sessions.push(session);
+      console.log(`Session ${session.id} ready`);
+    }
+  }
+
+  async getSession() {
+    // Round-robin session selection
+    const session = this.sessions.shift();
+    this.sessions.push(session);
+    return session;
+  }
+
+  async replaceSession(session) {
+    // Replace a session that got blocked or disconnected
+    const idx = this.sessions.indexOf(session);
+    if (idx !== -1) {
+      await session.stop().catch(() => {});
+      const newSession = await this.ceki.rent({ headless: false });
+      this.sessions[idx] = newSession;
+    }
+  }
+
+  async shutdown() {
+    await Promise.all(
+      this.sessions.map(s => s.stop().catch(() => {}))
+    );
+  }
+}</code></pre>
+
+        <h2>Step 2: Implement the Scraper</h2>
+        <pre><code>async function scrapePage(session, url) {
+  try {
+    await session.navigate(url);
+
+    // Wait for page to render
+    await session.waitForSelector('#content', 10000);
+
+    // Extract data via CDP
+    const data = await session.evaluate(() => {
+      return {
+        title: document.title,
+        description: document.querySelector('meta[name="description"]')?.content,
+        h1: document.querySelector('h1')?.textContent,
+        text: document.body.innerText.substring(0, 5000)
+      };
+    });
+
+    // Take a screenshot for verification
+    const filename = url.replace(/[^a-z0-9]/gi, '_') + '.png';
+    await session.screenshot('/tmp/scrapes/' + filename);
+
+    return { url, data, timestamp: new Date().toISOString() };
+  } catch (err) {
+    console.error(`Failed to scrape ${url}:`, err.message);
+    return { url, error: err.message };
+  }
+}</code></pre>
+
+        <h2>Step 3: Run the Pipeline</h2>
+        <pre><code>const pool = new BrowserPool('your_token', 3);
+await pool.initialize();
+
+const urls = [
+  'https://example.com/page1',
+  'https://example.com/page2',
+  'https://example.com/page3',
+];
+
+const results = [];
+for (const url of urls) {
+  const session = await pool.getSession();
+  const result = await scrapePage(session, url);
+  results.push(result);
+  console.log(`Scraped ${url}: ${result.data?.title || 'ERROR'}`);
+}
+
+await pool.shutdown();
+console.log(`Completed ${results.filter(r => r.data).length}/${urls.length} pages`);</code></pre>
+
+        <h2>Why Real Browsers Beat Headless + Proxies</h2>
+        <p>The traditional approach (headless browser + proxy rotation) fails because anti-bot systems detect inconsistencies between the browser fingerprint and the IP:</p>
+        <ul>
+          <li><strong>Headless detection:</strong> navigator.webdriver, missing Chrome extensions, modified User-Agent</li>
+          <li><strong>Fingerprint mismatch:</strong> canvas fingerprint from a Mac while the IP says Windows</li>
+          <li><strong>Behavioral analysis:</strong> too-perfect mouse movements, zero scrolling, instant navigation</li>
+          <li><strong>IP reputation:</strong> data center IPs are flagged as non-residential</li>
+        </ul>
+        <p>Real browser sessions eliminate all four signals — the browser is genuine, the fingerprint matches the IP, and the behavior is naturally human because humans control the browser when they're not renting it.</p>
+
+        <div class="cta-box">
+          <h3>Build Your Pipeline Today</h3>
+          <p>Rent real browsers from real people. No blocks, no captchas, no fingerprinting detection.</p>
+          <a href="https://browser.ceki.me" target="_blank" rel="noopener">Start Scraping →</a>
+        </div>
+
+        <p>For a more detailed comparison of scraping approaches, see <a href="https://telegra.ph/Web-Scraping-in-2026-Residential-Browsers-vs-Traditional-Proxies-07-16" target="_blank" rel="noopener">Web Scraping in 2026: Residential Browsers vs Traditional Proxies</a>.</p>
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p><a href="https://ceki-me.github.io/">Ceki Browser</a> — The P2P Browser Rental Marketplace for AI Agents</p>
+      <p><a href="https://browser.ceki.me" target="_blank" rel="noopener">browser.ceki.me</a> · <a href="https://ceki.me" target="_blank" rel="noopener">ceki.me</a> · <a href="https://ceki.me/mcp" target="_blank" rel="noopener">MCP Server</a></p>
+    </div>
+  </footer>
+</body>
+</html>

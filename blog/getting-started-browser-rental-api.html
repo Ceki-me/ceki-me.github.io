@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Getting Started with Browser Rental APIs: A Developer's Guide | Ceki Browser</title>
+  <meta name="description" content="Learn how to integrate browser rental APIs into your AI agent workflows. Step-by-step guide with code examples for Python and JavaScript SDKs.">
+  <link rel="canonical" href="https://ceki-me.github.io/blog/getting-started-browser-rental-api.html">
+
+  <!-- Schema.org TechArticle -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Getting Started with Browser Rental APIs: A Developer's Guide",
+    "description": "Learn how to integrate browser rental APIs into your AI agent workflows. Step-by-step guide with code examples.",
+    "author": {
+      "@type": "Organization",
+      "name": "Ceki Browser",
+      "url": "https://browser.ceki.me"
+    },
+    "datePublished": "2026-07-17",
+    "dateModified": "2026-07-17",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Ceki Browser",
+      "url": "https://browser.ceki.me"
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://ceki-me.github.io/blog/getting-started-browser-rental-api.html"
+    },
+    "proficiencyLevel": "Beginner",
+    "programmingLanguage": "JavaScript, Python"
+  }
+  </script>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Getting Started with Browser Rental APIs: A Developer's Guide">
+  <meta property="og:description" content="Learn how to integrate browser rental APIs into your AI agent workflows. Step-by-step guide with code examples for Python and JavaScript SDKs.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://ceki-me.github.io/blog/getting-started-browser-rental-api.html">
+  <meta property="og:site_name" content="Ceki Browser">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Getting Started with Browser Rental APIs: A Developer's Guide">
+  <meta name="twitter:description" content="Learn how to integrate browser rental APIs into your AI agent workflows.">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.7; color: #1a1a2e; background: #f8f9fa; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 60px 0 40px; text-align: center; }
+    header h1 { font-size: 2rem; margin-bottom: 16px; line-height: 1.3; }
+    header p { font-size: 1.1rem; opacity: 0.85; max-width: 600px; margin: 0 auto; }
+    .meta { margin-top: 16px; font-size: 0.9rem; opacity: 0.7; }
+    nav { background: #fff; border-bottom: 1px solid #e9ecef; padding: 12px 0; }
+    nav .container { display: flex; gap: 24px; }
+    nav a { color: #4361ee; text-decoration: none; font-size: 0.95rem; font-weight: 500; }
+    nav a:hover { text-decoration: underline; }
+    main { padding: 48px 0; }
+    article { background: white; border-radius: 12px; padding: 48px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    article h2 { font-size: 1.6rem; margin: 40px 0 16px; color: #1a1a2e; }
+    article h3 { font-size: 1.25rem; margin: 28px 0 12px; color: #2d3748; }
+    article p { margin-bottom: 16px; color: #4a5568; }
+    article ul, article ol { margin: 16px 0 24px; padding-left: 24px; color: #4a5568; }
+    article li { margin-bottom: 8px; }
+    article code { background: #edf2f7; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; font-family: 'Fira Code', monospace; }
+    article pre { background: #1a1a2e; color: #e2e8f0; padding: 20px; border-radius: 8px; overflow-x: auto; margin: 20px 0; font-size: 0.9rem; line-height: 1.5; }
+    article pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
+    .cta-box { background: linear-gradient(135deg, #4361ee, #3a0ca3); color: white; border-radius: 12px; padding: 32px; margin: 40px 0; text-align: center; }
+    .cta-box h3 { color: white; margin-top: 0; }
+    .cta-box p { color: rgba(255,255,255,0.85); }
+    .cta-box a { display: inline-block; background: white; color: #4361ee; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; margin-top: 16px; }
+    .cta-box a:hover { background: #f0f0f0; }
+    .related { margin: 40px 0; padding: 24px; background: #f8f9fa; border-radius: 8px; }
+    .related h3 { margin-top: 0; }
+    .related a { color: #4361ee; text-decoration: none; }
+    .related a:hover { text-decoration: underline; }
+    footer { text-align: center; padding: 40px 0; color: #718096; font-size: 0.9rem; border-top: 1px solid #e9ecef; }
+    footer a { color: #4361ee; text-decoration: none; }
+    @media (max-width: 640px) { header h1 { font-size: 1.5rem; } article { padding: 24px; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container">
+      <a href="https://ceki-me.github.io/">← Home</a>
+      <a href="https://ceki-me.github.io/blog/index.html">Blog</a>
+      <a href="https://browser.ceki.me" target="_blank" rel="noopener">browser.ceki.me</a>
+    </div>
+  </nav>
+
+  <header>
+    <div class="container">
+      <h1>Getting Started with Browser Rental APIs: A Developer's Guide</h1>
+      <p>Learn how to integrate browser rental APIs into your AI agent workflows using Python and JavaScript SDKs.</p>
+      <div class="meta">Published July 17, 2026 · 8 min read</div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <article>
+        <p>AI agents are transforming how we interact with the web, but they face a fundamental limitation: most websites use anti-bot systems (CAPTCHAs, fingerprinting, rate limiting) that block headless browsers and simple HTTP clients. The solution? <strong>Real browsers, rented from real people.</strong></p>
+
+        <p>Browser rental APIs like <a href="https://browser.ceki.me" target="_blank" rel="noopener">Ceki Browser</a> provide programmatic access to real browser instances running on real devices worldwide. This guide walks through the integration process from scratch.</p>
+
+        <h2>What is a Browser Rental API?</h2>
+        <p>A browser rental API lets you request a live browser session — a real Chrome/Firefox instance running on someone else's computer — and control it remotely via WebSocket or CDP (Chrome DevTools Protocol). You get:</p>
+        <ul>
+          <li><strong>Real browser fingerprint</strong> — canvas, WebGL, audio, and font fingerprints from a real device</li>
+          <li><strong>Residential IP</strong> — the browser runs on a real person's internet connection</li>
+          <li><strong>Human-like interaction</strong> — mouse movements, keystrokes, and scrolling that look natural</li>
+          <li><strong>CAPTCHA bypass</strong> — many CAPTCHA challenges are resolved automatically through the rental infrastructure</li>
+        </ul>
+
+        <h2>Prerequisites</h2>
+        <ul>
+          <li>Node.js 18+ or Python 3.8+</li>
+          <li>A Ceki Browser account (token-based authentication)</li>
+          <li>Basic familiarity with async/await patterns</li>
+        </ul>
+
+        <h2>Integration with the Ceki CLI</h2>
+        <p>The fastest way to start is with the Ceki CLI. Install it and authenticate:</p>
+
+        <pre><code># Install the CLI
+npm install -g ceki-cli
+
+# Set your agent token
+export CEKI_AGENT_TOKEN=your_token_here
+
+# Rent a browser session
+ceki rent --headless false
+
+# Navigate to a URL
+ceki navigate https://example.com
+
+# Execute JavaScript in the page
+ceki cdp --method Runtime.evaluate \
+  --params '{"expression":"document.title"}'
+
+# Click an element (with human-like mouse movement)
+ceki click 500 300
+
+# Type text into a field
+ceki type "Hello, World!" --selector "#my-input"
+
+# Stop the session when done
+ceki stop</code></pre>
+
+        <h2>JavaScript SDK Integration</h2>
+        <p>For programmatic control, use the Ceki JavaScript SDK:</p>
+
+        <pre><code>import { CekiBrowser } from '@ceki/browser-sdk';
+
+const browser = new CekiBrowser({
+  token: 'your_agent_token',
+  endpoint: 'https://api.ceki.me/mcp/agent'
+});
+
+// Rent a browser
+const session = await browser.rent({ headless: false });
+console.log(`Session ID: ${session.id}`);
+
+// Navigate to a page
+await session.navigate('https://example.com/login');
+
+// Fill out a login form
+await session.type('#username', 'myuser');
+await session.type('#password', 'mypassword');
+await session.click(400, 300);
+
+// Wait for navigation
+await session.waitForNavigation();
+
+// Extract data
+const title = await session.evaluate(
+  () => document.title
+);
+
+// Take a screenshot
+await session.screenshot('/tmp/page.png');
+
+// Clean up
+await session.stop();</code></pre>
+
+        <h2>Python SDK Integration</h2>
+        <p>The Python SDK offers similar functionality:</p>
+
+        <pre><code>from ceki import CekiBrowser
+import asyncio
+
+async def main():
+    browser = CekiBrowser(
+        token="your_agent_token",
+        endpoint="https://api.ceki.me/mcp/agent"
+    )
+
+    # Rent a session
+    session = await browser.rent(headless=False)
+    print(f"Session: {session.id}")
+
+    # Navigate
+    await session.navigate("https://example.com")
+
+    # Execute JavaScript
+    title = await session.evaluate(
+        "document.title"
+    )
+    print(f"Page title: {title}")
+
+    # Click at coordinates
+    await session.click(500, 300)
+
+    # Type text
+    await session.type("Hello from Ceki!", "#my-input")
+
+    # Get page content
+    html = await session.get_html()
+    print(f"Page has {len(html)} characters")
+
+    # Take screenshot
+    await session.screenshot("/tmp/screenshot.png")
+
+    # Clean up
+    await session.stop()
+
+asyncio.run(main())</code></pre>
+
+        <h2>Real-World Use Cases</h2>
+
+        <h3>1. AI Agent Web Automation</h3>
+        <p>AI agents need to interact with web services that have anti-bot protection. Browser rental APIs give them access to real browsers that look like human users:</p>
+        <ul>
+          <li>LLM agents booking appointments on scheduling platforms</li>
+          <li>AI assistants filling out multi-step forms</li>
+          <li>Automated data extraction from JS-heavy SPAs</li>
+        </ul>
+
+        <h3>2. E2E Testing with Real Devices</h3>
+        <p>Traditional testing uses headless browsers that miss production-only bugs. Real browser sessions catch issues with WebGL rendering, font loading, and extension interactions.</p>
+
+        <h3>3. Web Scraping at Scale</h3>
+        <p>Rotate through hundreds of residential IPs and browser fingerprints to collect data without getting blocked. Each session is a clean browser environment with a unique fingerprint.</p>
+
+        <div class="cta-box">
+          <h3>Ready to try it yourself?</h3>
+          <p>Get started with Ceki Browser — rent real browsers from real people for your AI agents.</p>
+          <a href="https://browser.ceki.me" target="_blank" rel="noopener">Start Renting Browsers →</a>
+        </div>
+
+        <h2>Best Practices</h2>
+        <ul>
+          <li><strong>Session lifecycle:</strong> Always stop sessions when done to avoid idle charges</li>
+          <li><strong>Error handling:</strong> Implement retry logic — sessions can occasionally fail on provider disconnect</li>
+          <li><strong>Respect rate limits:</strong> Even with real browsers, aggressive request rates trigger rate limiting</li>
+          <li><strong>Use human-like delays:</strong> Add random delays between actions to appear more natural</li>
+        </ul>
+
+        <h2>Resources</h2>
+        <ul>
+          <li><a href="https://browser.ceki.me" target="_blank" rel="noopener">Ceki Browser — Rent Real Browsers for AI Agents</a></li>
+          <li><a href="https://ceki.me/mcp" target="_blank" rel="noopener">Ceki MCP Server — Connect AI Assistants to Browsers</a></li>
+          <li><a href="https://telegra.ph/How-to-Connect-AI-Agents-to-Real-Browsers-Using-MCP-07-16" target="_blank" rel="noopener">How to Connect AI Agents to Real Browsers Using MCP</a></li>
+          <li><a href="https://telegra.ph/Ceki-vs-Headless-Browsers-A-Practical-Comparison-07-16" target="_blank" rel="noopener">Ceki vs Headless Browsers: A Practical Comparison</a></li>
+        </ul>
+
+        <div class="related">
+          <h3>Related Articles</h3>
+          <ul>
+            <li><a href="https://ceki-me.github.io/blog/ceki-vs-browserstack-vs-lambdatest.html">Ceki vs BrowserStack vs LambdaTest: Real Browser Comparison for AI</a></li>
+            <li><a href="https://ceki-me.github.io/blog/web-scraping-pipeline-real-browsers.html">Building a Web Scraping Pipeline with Real Browsers</a></li>
+            <li><a href="https://ceki-me.github.io/blog/economics-p2p-browser-networks.html">The Economics of Peer-to-Peer Browser Networks</a></li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p><a href="https://ceki-me.github.io/">Ceki Browser</a> — The P2P Browser Rental Marketplace for AI Agents</p>
+      <p><a href="https://browser.ceki.me" target="_blank" rel="noopener">browser.ceki.me</a> · <a href="https://ceki.me" target="_blank" rel="noopener">ceki.me</a> · <a href="https://ceki.me/mcp" target="_blank" rel="noopener">MCP Server</a></p>
+    </div>
+  </footer>
+</body>
+</html>
