@@ -138,7 +138,25 @@
         <h2>📚 Article Library — 88 Articles</h2>
         <p>Our complete collection of articles about browser rental, AI automation, real browser technology, and passive income with Ceki.</p>
 
+        <!-- Category Navigation -->
+        <div style="margin: 32px 0; padding: 20px; background: #f0f0f5; border-radius: 8px;">
+            <p style="font-weight: 600; margin-bottom: 12px; color: #1a1a2e;">Browse by category:</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                <a href="#cat-getting-started" style="background: #1a1a2e; color: white; padding: 6px 16px; border-radius: 20px; text-decoration: none; font-size: 0.85em;">🚀 Getting Started</a>
+                <a href="#cat-income" style="background: #e94560; color: white; padding: 6px 16px; border-radius: 20px; text-decoration: none; font-size: 0.85em;">💰 Passive Income</a>
+                <a href="#cat-tech" style="background: #0f3460; color: white; padding: 6px 16px; border-radius: 20px; text-decoration: none; font-size: 0.85em;">⚙️ Technical</a>
+                <a href="#cat-ai" style="background: #4361ee; color: white; padding: 6px 16px; border-radius: 20px; text-decoration: none; font-size: 0.85em;">🤖 AI & Automation</a>
+                <a href="#cat-comparisons" style="background: #2d6a4f; color: white; padding: 6px 16px; border-radius: 20px; text-decoration: none; font-size: 0.85em;">📊 Comparisons</a>
+                <a href="#cat-dev" style="background: #7b2cbf; color: white; padding: 6px 16px; border-radius: 20px; text-decoration: none; font-size: 0.85em;">💻 Developer Guides</a>
+                <a href="#cat-verticals" style="background: #d00000; color: white; padding: 6px 16px; border-radius: 20px; text-decoration: none; font-size: 0.85em;">🏢 Industry</a>
+                <a href="#cat-security" style="background: #3a0ca3; color: white; padding: 6px 16px; border-radius: 20px; text-decoration: none; font-size: 0.85em;">🔒 Security</a>
+            </div>
+        </div>
+
         <div class="articles">
+            <!-- 🏢 Industry Verticals -->
+            <div id="cat-verticals" style="grid-column: 1/-1;"><h3 style="font-size: 1.4em; margin: 24px 0 8px; color: #d00000;">🏢 Industry Verticals</h3><p style="color: #666; margin-bottom: 8px;">Use cases and applications across industries</p></div>
+
             <div class="article-card">
                 <h3>Library and Archive Research</h3>
                 <p>Browser automation for digital library catalogs, archival systems, and special collections.</p>
@@ -244,6 +262,9 @@
                 <p>Real browser technology for telecom coverage maps, pricing, and plan data collection.</p>
                 <a href="https://telegra.ph/Real-Browser-Technology-for-Telecommunications-Industry-Data-Collection-07-16" target="_blank" rel="noopener">Read →</a>
             </div>
+            <!-- 🤖 AI & Automation -->
+            <div id="cat-ai" style="grid-column: 1/-1;"><h3 style="font-size: 1.4em; margin: 24px 0 8px; color: #4361ee;">🤖 AI & Automation</h3><p style="color: #666; margin-bottom: 8px;">AI agents, browser automation, MCP, and the autonomous economy</p></div>
+
             <div class="article-card">
                 <h3>Gaming Market Research</h3>
                 <p>Browser automation for Steam, Metacritic, and Twitch data collection at scale.</p>
@@ -409,6 +430,9 @@
                 <p>Rate limiting and retry strategies for production systems using the Ceki browser rental API.</p>
                 <a href="https://telegra.ph/Ceki-API-Rate-Limiting-and-Retry-Strategies-for-Production-Systems-07-16" target="_blank" rel="noopener">Read →</a>
             </div>
+            <!-- 💰 Passive Income -->
+            <div id="cat-income" style="grid-column: 1/-1;"><h3 style="font-size: 1.4em; margin: 24px 0 8px; color: #e94560;">💰 Passive Income & Economics</h3><p style="color: #666; margin-bottom: 8px;">Earnings, economics, and side hustles with browser rental</p></div>
+
             <div class="article-card">
                 <h3>Browser Rental Economics</h3>
                 <p>Supply, demand, and pricing in the two-sided browser rental marketplace in 2026.</p>
@@ -449,6 +473,9 @@
                 <p>Tutorial for connecting Claude and other MCP-compatible AI agents to real Chrome browsers through Ceki.</p>
                 <a href="https://telegra.ph/How-to-Connect-AI-Agents-to-Real-Browsers-Using-MCP-07-16" target="_blank" rel="noopener">Read →</a>
             </div>
+            <!-- ⚙️ Technical -->
+            <div id="cat-tech" style="grid-column: 1/-1;"><h3 style="font-size: 1.4em; margin: 24px 0 8px; color: #0f3460;">⚙️ Technical Architecture</h3><p style="color: #666; margin-bottom: 8px;">Deep dives into architecture, networking, and infrastructure</p></div>
+
             <div class="article-card">
                 <h3>P2P Browser Rental Architecture</h3>
                 <p>How the four-layer architecture of Ceki makes peer-to-peer browser rental secure, private, and reliable.</p>
@@ -549,6 +576,9 @@
                 <p>Ensuring brand safety in 2026 — why ad verification needs real browsers with genuine GPU rendering.</p>
                 <a href="https://telegra.ph/Ad-Verification-with-Real-Browsers-Ensuring-Brand-Safety-in-2026-07-16" target="_blank" rel="noopener">Read →</a>
             </div>
+            <!-- 📊 Comparisons & Developer Guides -->
+            <div id="cat-comparisons" style="grid-column: 1/-1;"><h3 style="font-size: 1.4em; margin: 24px 0 8px; color: #2d6a4f;">📊 Comparisons & Benchmarks</h3><p style="color: #666; margin-bottom: 8px;">Head-to-head comparisons with alternative solutions</p></div>
+
             <div class="article-card">
                 <h3>Ceki for QA Teams</h3>
                 <p>Real browser testing without infrastructure overhead — Selenium Grid replacement with Ceki.</p>
@@ -669,8 +699,37 @@
 
 <footer>
     <div class="container">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 32px; text-align: left; margin-bottom: 24px;">
+            <div style="flex: 1; min-width: 160px;">
+                <p style="color: white; font-weight: 600; margin-bottom: 12px;">Platform</p>
+                <p><a href="https://browser.ceki.me" style="color:#aaa; text-decoration: none;">browser.ceki.me</a></p>
+                <p><a href="https://ceki.me" style="color:#aaa; text-decoration: none;">ceki.me</a></p>
+                <p><a href="https://ceki.me/mcp" style="color:#aaa; text-decoration: none;">MCP Server</a></p>
+                <p><a href="https://ceki.me/llms.txt" style="color:#aaa; text-decoration: none;">AI Guide</a></p>
+            </div>
+            <div style="flex: 1; min-width: 160px;">
+                <p style="color: white; font-weight: 600; margin-bottom: 12px;">Articles</p>
+                <p><a href="#cat-verticals" style="color:#aaa; text-decoration: none;">Industry Verticals</a></p>
+                <p><a href="#cat-income" style="color:#aaa; text-decoration: none;">Passive Income</a></p>
+                <p><a href="#cat-tech" style="color:#aaa; text-decoration: none;">Technical</a></p>
+                <p><a href="#cat-comparisons" style="color:#aaa; text-decoration: none;">Comparisons</a></p>
+            </div>
+            <div style="flex: 1; min-width: 160px;">
+                <p style="color: white; font-weight: 600; margin-bottom: 12px;">Developers</p>
+                <p><a href="https://github.com/Ceki-me/python-sdk" style="color:#aaa; text-decoration: none;">Python SDK</a></p>
+                <p><a href="https://github.com/Ceki-me/js-sdk" style="color:#aaa; text-decoration: none;">JavaScript SDK</a></p>
+                <p><a href="https://github.com/Ceki-me" style="color:#aaa; text-decoration: none;">GitHub →</a></p>
+                <p><a href="https://ceki-me.github.io/blog/" style="color:#aaa; text-decoration: none;">Blog</a></p>
+            </div>
+            <div style="flex: 1; min-width: 160px;">
+                <p style="color: white; font-weight: 600; margin-bottom: 12px;">Connect</p>
+                <p><a href="https://t.me/cekime" style="color:#aaa; text-decoration: none;">Telegram</a></p>
+                <p><a href="https://www.youtube.com/channel/UCBldnVvjx2dOfr7TtObZmMQ" style="color:#aaa; text-decoration: none;">YouTube</a></p>
+                <p><a href="https://github.com/Ceki-me" style="color:#aaa; text-decoration: none;">GitHub Org</a></p>
+            </div>
+        </div>
+        <hr style="border-color: #333; margin-bottom: 20px;">
         <p><strong>Ceki Browser</strong> — Real Humans, Real Browsers, Real Income.</p>
-        <p><a href="https://browser.ceki.me" style="color:#e94560">browser.ceki.me</a> &nbsp;·&nbsp; <a href="https://ceki-me.github.io/blog/" style="color:#e94560">Blog</a> &nbsp;·&nbsp; <a href="https://ceki.me/mcp" style="color:#e94560">ceki.me/mcp</a> &nbsp;·&nbsp; <a href="https://github.com/Ceki-me" style="color:#e94560">GitHub</a></p>
         <p style="margin-top:12px; font-size:0.8em">© 2026 Ceki Browser. All rights reserved.</p>
     </div>
 </footer>
